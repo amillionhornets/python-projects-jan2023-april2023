@@ -1,0 +1,34 @@
+{
+    "student": [
+        {
+            "id": 1,
+            "name": "Dylan",
+            "age": 18
+        },
+        {
+            "id": 2,
+            "name": "Jacob",
+            "age": 18
+        },
+        {
+            "id": "3",
+            "name": "Fortnite",
+            "age": "3"
+        },
+        {
+            "id": "3",
+            "name": "Fortnite",
+            "age": "3"
+        },
+        {
+            "id": "3",
+            "name": "Fortnite",
+            "age": "3"
+        },
+        {
+            "id": "3",
+            "name": "Fortnite",
+            "age": "3"
+        }
+    ]
+}

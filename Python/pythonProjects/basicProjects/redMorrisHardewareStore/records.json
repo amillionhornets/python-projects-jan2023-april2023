@@ -1,0 +1,26 @@
+[
+    {
+        "Name": "Hammer",
+        "Price": 9.99,
+        "Quantity": 5,
+        "Total": 49.95
+    },
+    {
+        "Name": "screwdriver",
+        "Price": "100",
+        "Quantity": "1",
+        "Total": 100.0
+    },
+    {
+        "Name": "fortnite",
+        "Price": "1000000000",
+        "Quantity": "2",
+        "Total": 2000000000.0
+    },
+    {
+        "Name": "jacob",
+        "Price": "0",
+        "Quantity": "1",
+        "Total": 0.0
+    }
+]

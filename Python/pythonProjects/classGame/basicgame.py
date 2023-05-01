@@ -130,7 +130,10 @@ def death(hp):
     else:
         return False
 
-# Shows the percent chance of the enemy's action and chooses one based on that percentages
+# Shows the percent chance of the enemy's action and chooses an action based on those percentages
+"""
+Only cool thing going on.
+"""
 def randomAction():
     allActions = ['block', 'heavy', 'attack']
     overAllChance = 100

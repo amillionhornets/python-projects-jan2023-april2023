@@ -5,12 +5,13 @@ import csv
 
 """
 1. The Hangman program randomly selects a secret word from a list of secret words. The random module will provide this ability, so line 1 in program imports it.
-2. The Game: Here, a random word (a fruit name) is picked up from our collection and the player gets limited chances to win the game.
+2. The Game: Here, a random word is picked up from our collection and the player gets limited chances to win the game.
 3. When a letter in that word is guessed correctly, that letter position in the word is made visible. 
     In this way, all letters of the word are to be guessed before all the chances are over. 
 4. For convenience, we have given length of word + 2 chances. For example, word to be guessed is mango, then user gets 5 + 2 = 7 chances, 
     as mango is a five-letter word.
 """
+
 # Returns a secrete word from the secretWords.csv
 def getSecretWord():
     with open("Python\pythonProjects\hangmanCanvas\secretWords.csv", "r") as csvFile:
@@ -47,13 +48,16 @@ def checkWord(secretWord, userInput):
     else:
         print("This letter is not in the secret word.")
         return False
+    
 # If the player wins this function displays that
 def won():
     print("You won`")
+    return False
 
 # If the player loses this function displays that
 def lost():
     print("You lost")
+    return False
 
 # Main Function for hangman game
 def main():
@@ -67,16 +71,14 @@ def main():
     print(f"The secret word is {len(SECRET_WORD)} character long!")
     while playing:
         print(f"You have { MAX_ATTEMPT - attempts} attempts left!")
+        
         print(f"What is your guess?: ")
         userGuess = input()
         userGuess = checkUserInput(userGuess, charactersUsed)
-
         if userGuess == SECRET_WORD:
-            won()
-            playing = False
+            playing = won()
         if attempts > MAX_ATTEMPT:
-            lost()
-            playing = False
+            playing = lost()
         # if checkWord(SECRET_WORD, userGuess):
         #     print(changeLetters())
         charactersUsed.append(userGuess)

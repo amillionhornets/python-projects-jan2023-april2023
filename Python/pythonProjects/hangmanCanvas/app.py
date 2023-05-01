@@ -1,6 +1,8 @@
 from random import randint
 import csv
 
+# WIP
+
 """
 1. The Hangman program randomly selects a secret word from a list of secret words. The random module will provide this ability, so line 1 in program imports it.
 2. The Game: Here, a random word (a fruit name) is picked up from our collection and the player gets limited chances to win the game.
@@ -68,6 +70,7 @@ def main():
         print(f"What is your guess?: ")
         userGuess = input()
         userGuess = checkUserInput(userGuess, charactersUsed)
+
         if userGuess == SECRET_WORD:
             won()
             playing = False

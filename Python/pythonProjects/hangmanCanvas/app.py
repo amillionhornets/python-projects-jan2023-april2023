@@ -59,12 +59,35 @@ def lost():
     print("You lost")
     return False
 
+def appendCurrentWord(uGuess, currentWord, Secretword):
+    splitSecretWord = Secretword.split()
+    currentWordSplit = currentWord.split()
+    underScoresWord = ""
+    guessIndexes = []
+    finalWord = ""
+    for a in range(len(splitSecretWord)):
+        underScoresWord +="_"
+    for i in range(len(splitSecretWord)):
+        if splitSecretWord[i] == uGuess:
+            guessIndexes.append(i)
+    # for x in range(len(splitSecretWord)):
+    #     if currentWordSplit[x] == splitSecretWord[x]:
+    #         underScoresWord[x] = currentWordSplit[x]
+    #     elif uGuess == splitSecretWord[x]:
+    #         underScoresWord[x] = uGuess
+    for char in underScoresWord:
+        finalWord = finalWord + char
+    return finalWord
+
+    # for x in range(len(guessIndexes)):
+        
 # Main Function for hangman game
 def main():
     SECRET_WORD = getSecretWord()
     MAX_ATTEMPT = len(SECRET_WORD) + 2
     userGuess = ""
     attempts = 0
+    currentWord = ""
     charactersUsed = []
     playing = True
     print(SECRET_WORD)
@@ -75,12 +98,15 @@ def main():
         print(f"What is your guess?: ")
         userGuess = input()
         userGuess = checkUserInput(userGuess, charactersUsed)
-        if userGuess == SECRET_WORD:
-            playing = won()
+        
+        if userGuess in SECRET_WORD:
+            currentWord = appendCurrentWord(userGuess, currentWord, SECRET_WORD)
+            print(currentWord)
+            if currentWord == SECRET_WORD: 
+                playing = won()
         if attempts > MAX_ATTEMPT:
             playing = lost()
-        # if checkWord(SECRET_WORD, userGuess):
-        #     print(changeLetters())
+        
         charactersUsed.append(userGuess)
         
 if __name__ == "__main__":

@@ -1,8 +1,6 @@
 from random import randint
 import csv
 
-# WIP
-
 """
 1. The Hangman program randomly selects a secret word from a list of secret words. The random module will provide this ability, so line 1 in program imports it.
 2. The Game: Here, a random word is picked up from our collection and the player gets limited chances to win the game.
@@ -15,8 +13,8 @@ import csv
 # Returns a secrete word from the secretWords.csv
 def getSecretWord():
     with open("Python\pythonProjects\hangmanCanvas\secretWords.csv", "r") as csvFile:
-        randRow = randint(1, 21) # Sets a random row for the csv file to find
-        randCol = randint(1, 10) # Sets a random column for the csv file to return
+        randRow = randint(1, 20) # Sets a random row for the csv file to find
+        randCol = randint(1, 9) # Sets a random column for the csv file to return
         """
         First for loop returns the random row from the csvFile.
         Second loop finds the column and returns the word to the main function.
@@ -30,16 +28,20 @@ def getSecretWord():
 
 # Makes sure the user only entered one character and the character isn't a duplicate
 def checkUserInput(userInput, chars):
-    uInput = ""
     try:
         if len(userInput) != 1:
-            raise
+            raise Exception()
+        if not userInput.isalpha():
+            raise Exception()
+        if userInput in chars:
+            raise Exception()
     except:
-        while len(uInput) != 1 and uInput not in chars:
+        while len(userInput) != 1 or userInput in chars:
             print("Please enter one character and a character you haven't used")
-            uInput = input()
+            userInput = input()
     finally:
-        return uInput
+        return userInput
+
     
 def checkWord(secretWord, userInput):
     if userInput in secretWord:
@@ -47,67 +49,67 @@ def checkWord(secretWord, userInput):
         return True
     else:
         print("This letter is not in the secret word.")
-        return False
-    
+        return False   
+
 # If the player wins this function displays that
-def won():
-    print("You won`")
+def won(secretWord):
+    print("You won!")
+    print(f"The secret word was {secretWord}")
     return False
 
 # If the player loses this function displays that
-def lost():
+def lost(secretWord):
     print("You lost")
+    print(f"The secret word was {secretWord}")
     return False
 
 def appendCurrentWord(uGuess, currentWord, Secretword):
-    splitSecretWord = Secretword.split()
-    currentWordSplit = currentWord.split()
-    underScoresWord = ""
-    guessIndexes = []
     finalWord = ""
-    for a in range(len(splitSecretWord)):
-        underScoresWord +="_"
-    for i in range(len(splitSecretWord)):
-        if splitSecretWord[i] == uGuess:
-            guessIndexes.append(i)
-    # for x in range(len(splitSecretWord)):
-    #     if currentWordSplit[x] == splitSecretWord[x]:
-    #         underScoresWord[x] = currentWordSplit[x]
-    #     elif uGuess == splitSecretWord[x]:
-    #         underScoresWord[x] = uGuess
-    for char in underScoresWord:
-        finalWord = finalWord + char
+    for i in range(len(Secretword)):
+        if currentWord[i] == Secretword[i]:
+            finalWord+=currentWord[i]
+            continue
+        elif Secretword[i] == uGuess:
+            finalWord = finalWord + uGuess
+        else:
+            finalWord+="_"
     return finalWord
-
-    # for x in range(len(guessIndexes)):
         
 # Main Function for hangman game
 def main():
     SECRET_WORD = getSecretWord()
-    MAX_ATTEMPT = len(SECRET_WORD) + 2
+    # SECRET_WORD = "apple"
+    max_attempts = len(SECRET_WORD) + 2
     userGuess = ""
     attempts = 0
     currentWord = ""
+    for i in range(len(SECRET_WORD)):
+        currentWord+="_"
     charactersUsed = []
     playing = True
-    print(SECRET_WORD)
+    # print(SECRET_WORD)
     print(f"The secret word is {len(SECRET_WORD)} character long!")
     while playing:
-        print(f"You have { MAX_ATTEMPT - attempts} attempts left!")
-        
+        print(f"-----------------------------------------------------")
+        print(f"You have { max_attempts} attempt(s) left!")
         print(f"What is your guess?: ")
         userGuess = input()
         userGuess = checkUserInput(userGuess, charactersUsed)
-        
         if userGuess in SECRET_WORD:
+            # print(userGuess)
             currentWord = appendCurrentWord(userGuess, currentWord, SECRET_WORD)
-            print(currentWord)
+            
             if currentWord == SECRET_WORD: 
-                playing = won()
-        if attempts > MAX_ATTEMPT:
-            playing = lost()
+                playing = won(SECRET_WORD)
+                break
+        else:
+            max_attempts-=1
+        if max_attempts <= 0:
+            playing = lost(SECRET_WORD)
+            break
         
         charactersUsed.append(userGuess)
+        print(currentWord)
         
 if __name__ == "__main__":
     main()

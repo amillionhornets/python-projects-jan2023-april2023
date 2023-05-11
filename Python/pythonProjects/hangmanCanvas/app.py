@@ -13,8 +13,8 @@ import csv
 # Returns a secrete word from the secretWords.csv
 def getSecretWord():
     with open("Python\pythonProjects\hangmanCanvas\secretWords.csv", "r") as csvFile:
-        randRow = randint(1, 20) # Sets a random row for the csv file to find
-        randCol = randint(1, 9) # Sets a random column for the csv file to return
+        randRow = randint(1, 21) # Sets a random row for the csv file to find
+        randCol = randint(1, 10) # Sets a random column for the csv file to return
         """
         First for loop returns the random row from the csvFile.
         Second loop finds the column and returns the word to the main function.

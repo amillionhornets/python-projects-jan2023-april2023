@@ -5,7 +5,7 @@ from re import sub,split
 def bust():
     pass
 
-def hit(playerHand, usedCards):
+def hit(playerCard1, playerCard2, usedCards):
     draw = ""
     with open(r"Python\pythonProjects\blackjackProject\cards.csv") as csvFile:
         pass
@@ -46,10 +46,10 @@ def main():
     else:
         playerTotal = int(playerCard1[2]) + int(playerCard2[2])
     print("Your total is " + str(playerTotal))
-    print("Would like to Hit(h) or Stand(s): ")
+    print("Would like to Hit(h) or Stand(s): ", end="")
     choice = input()
     if choice == "h":
-        hit()
+        hit(playerCard1, playerCard2, usedCards)
     else:
         pass
 
